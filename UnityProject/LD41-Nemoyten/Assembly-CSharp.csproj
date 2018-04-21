@@ -52,6 +52,10 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\GameStateManager.cs" />
+     <Compile Include="Assets\NavMeshComponents\Scripts\NavMeshLink.cs" />
+     <Compile Include="Assets\NavMeshComponents\Scripts\NavMeshModifier.cs" />
+     <Compile Include="Assets\NavMeshComponents\Scripts\NavMeshModifierVolume.cs" />
+     <Compile Include="Assets\NavMeshComponents\Scripts\NavMeshSurface.cs" />
      <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\CameraControls.cs" />
      <Compile Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\Scripts\IcoBumpin.cs" />
      <Compile Include="Assets\ProCore\ProBuilder\API Examples\Misc\HueCube.cs" />
