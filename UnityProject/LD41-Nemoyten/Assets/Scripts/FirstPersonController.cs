@@ -18,6 +18,7 @@ public class FirstPersonController : MonoBehaviour {
 	bool alive = true;
 
 	public GameObject stew;
+	public GameObject invisibleFloorOfDoom;
 
 	void Start () {
 		rb = GetComponent<Rigidbody>();
@@ -44,6 +45,11 @@ public class FirstPersonController : MonoBehaviour {
 			alive = false;
 			deathText.enabled = true;
 			deathText.text = "GAME OVER: YOU WERE NOT ONE OF THE INGREDIENTS";
+		}
+		else if (collider.gameObject == invisibleFloorOfDoom){
+			alive = false;
+			deathText.enabled = true;
+			deathText.text = "GAME OVER: YOU FELL OFF OF THE WORLD. YOU WEREN'T EVEN AT 100% YET";
 		}
 	}
 }
