@@ -20,10 +20,23 @@ public class FirstPersonController : MonoBehaviour {
 	public GameObject stew;
 	public GameObject invisibleFloorOfDoom;
 
+	float rateOfFire = .5f;
+	float lastFired = 0;
+
+	public GameObject bulletPrefab;
+	public GameObject bulletSpawnPoint;
+	float bulletSpeed = 2.0f;
+
+	public GameObject gun;
+
+	GameObject fpsCamera;
+
 	void Start () {
 		rb = GetComponent<Rigidbody>();
+		fpsCamera = GetComponentInChildren<Camera>().gameObject;
 	}
 	
+
 	void Update () {
 		if (!alive){
 			return;
@@ -37,6 +50,16 @@ public class FirstPersonController : MonoBehaviour {
 		if (Input.GetButtonDown("Jump") && Physics.Raycast(feets.transform.position, Vector3.down, .2f, groundCollision)){
 			Debug.Log("Jumping");
 			rb.AddForce(new Vector3(0, jumpVelocity, 0), ForceMode.Impulse);
+		}
+
+		if (Input.GetButtonDown("Fire1")){
+			if (Time.time - rateOfFire > lastFired){
+				//Debug.Log("Shoot " + Time.time.ToString());
+				lastFired = Time.time;
+
+				GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.transform.position, Quaternion.identity);
+				bullet.transform.GetComponent<Rigidbody>().AddForce(fpsCamera.transform.forward * bulletSpeed, ForceMode.Impulse);
+			}
 		}
 	}
 
