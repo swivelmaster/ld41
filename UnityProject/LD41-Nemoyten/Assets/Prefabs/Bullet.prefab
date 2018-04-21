@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4796367844709584}
   - component: {fileID: 198245987162999218}
   - component: {fileID: 199322626991063398}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,9 +37,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4532121396119934}
   - component: {fileID: 33595911637604902}
-  - component: {fileID: 135780982693089086}
   - component: {fileID: 23641262769380162}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +54,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4927181697509820}
   - component: {fileID: 54214229566983806}
-  m_Layer: 0
+  - component: {fileID: 114995373614030180}
+  - component: {fileID: 135210431740244028}
+  m_Layer: 9
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,12 +160,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &135780982693089086
+--- !u!114 &114995373614030180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1969471507899756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78bfe691691844c5cbad82f2032c5f2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExplodeParticle: {fileID: 1665057200110432, guid: 418369dcd79334b31b7a6efbd8a47ec3,
+    type: 2}
+--- !u!135 &135210431740244028
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1873477039789484}
+  m_GameObject: {fileID: 1969471507899756}
   m_Material: {fileID: 13400000, guid: 9d07befe18c6b4b8eb77aa33b83a4bf6, type: 2}
   m_IsTrigger: 1
   m_Enabled: 1
@@ -231,7 +245,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1513108005
+  randomSeed: 748473361
   InitialModule:
     serializedVersion: 3
     enabled: 1
