@@ -11,6 +11,10 @@ public class Enemy : MonoBehaviour {
 	Rigidbody rb;
 	public bool alive = true;
 
+	public GameStateManager.EnemyType enemyType = GameStateManager.EnemyType.DogO;
+
+	public GameObject StewEnterParticle;
+
 	public float awakeDistance = 5f;
 	// Wake up agent when shot even if player is beyond awake distance
 	bool wasHitOnce = false;
@@ -58,7 +62,9 @@ public class Enemy : MonoBehaviour {
 		if (collider.gameObject.layer == ProjectileLayer){
 			GotHit(collider.gameObject);
 		} else if (collider.gameObject.layer == StewLayer){
-			
+			GameStateManager.instance.UpdateRecipe(enemyType);
+			Instantiate(StewEnterParticle, transform.position, StewEnterParticle.transform.rotation);
+			Destroy(this.gameObject);
 		}
 	}
 
@@ -117,7 +123,10 @@ public class Enemy : MonoBehaviour {
 		agent.enabled = false;
 		
 		alive = false;
-		Debug.Log("Dead.");
+
+		// This is convoluted but we need the game object that contains the mesh renderer
+		// so we can rotate it to show that the character is dead
+		GetComponentInChildren<MeshRenderer>().transform.Rotate(Vector3.forward, 90f);
 
 		rb.isKinematic = false;
 	}
