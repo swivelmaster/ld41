@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameStateManager : MonoBehaviour {
 	
@@ -39,9 +40,18 @@ public class GameStateManager : MonoBehaviour {
 
 	public Recipe CurrentRecipe;
 
+	public Text RecipeText;
+
+	public Text RecipeCompleteText;
+
 	void Start () {
 		instance = this;
-		CurrentRecipe = new Recipe(1, 0, 0, 0, 0);
+
+		AllRecipes.Enqueue(new Recipe(1, 0, 0, 0, 0));
+		AllRecipes.Enqueue(new Recipe(0, 1, 0, 0, 0));
+
+		GetNextRecipe();
+		UpdateRecipeText();
 	}
 	
 	public void UpdateRecipe(EnemyType enemyType){
@@ -64,8 +74,42 @@ public class GameStateManager : MonoBehaviour {
 		}
 
 		if (!CurrentRecipe.IsValid()){
-			Debug.Log("TRIGGER LOSE CONDITION!");
+			Player.GetComponent<FirstPersonController>().WrongRecipeDeath();
+		} else if (CurrentRecipe.Complete()){
+			if (AllRecipes.Count == 0){
+				Player.GetComponent<FirstPersonController>().GameCompleteDeath();
+				RecipeText.text = "REQUIRED INGREDIENTS:\nONE GAMER";
+				return;
+			} else {
+				GetNextRecipe();
+				RecipeCompleteText.text = "DELICIOUS!\nAND YET I STILL HUNGER...";
+				StartCoroutine(ClearDeliciousText());
+			}
 		}
+
+		UpdateRecipeText();
+	}
+
+	Queue<Recipe> AllRecipes = new Queue<Recipe>{};
+
+	void GetNextRecipe(){
+		CurrentRecipe = AllRecipes.Dequeue();
+	}
+
+	IEnumerator ClearDeliciousText(){
+		yield return new WaitForSeconds(2f);
+		RecipeCompleteText.text = "";
+	}
+
+	void UpdateRecipeText(){
+		string text = "REQUIRED INGREDIENTS:\nDOG-O's: ";
+		text += CurrentRecipe.DogO.ToString() + "\n";
+		text += "SHOOTY-CHUTES: " + CurrentRecipe.ShootyChute.ToString() + "\n";
+		text += "BULLION CUBES: " + CurrentRecipe.BullionCube.ToString() + "\n";
+		text += "SPICY MEMES: " + CurrentRecipe.SpicyMeme.ToString() + "\n";
+		text += "STEAMED ARTICHOKES: " + CurrentRecipe.SteamedArtichoke.ToString() + "\n";
+
+		RecipeText.text = text;
 	}
 	
 

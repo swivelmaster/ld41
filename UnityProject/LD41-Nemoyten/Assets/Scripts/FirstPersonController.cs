@@ -38,6 +38,7 @@ public class FirstPersonController : MonoBehaviour {
 	public Text HealthText;
 
 	public GameObject PlayerBloodParticles;
+	public GameObject PlayerBloodParticlesLooping;
 	public GameObject BloodParticlesSpawnPoint;
 
 	float invulnerableTime = 1.5f;
@@ -129,18 +130,35 @@ public class FirstPersonController : MonoBehaviour {
 		}
 		
 		if (collider.gameObject == stew){
-			alive = false;
-			deathText.enabled = true;
-			deathText.text = "GAME OVER: YOU WERE NOT ONE OF THE INGREDIENTS\nPRESS R TO RESTART";
+			PlayerDeath("GAME OVER: YOU WERE NOT ONE OF THE INGREDIENTS\nPRESS R TO RESTART");
 		}
 		else if (collider.gameObject == invisibleFloorOfDoom){
-			alive = false;
-			deathText.enabled = true;
-			deathText.text = "GAME OVER: YOU FELL OFF OF THE WORLD. YOU WEREN'T EVEN AT 100% YET\nPRESS R TO RESTART";
-			Instantiate(PlayerBloodParticles, BloodParticlesSpawnPoint.transform.position, PlayerBloodParticles.transform.rotation);
+			PlayerDeath("GAME OVER: YOU FELL OFF OF THE WORLD. YOU WEREN'T EVEN AT 100% YET\nPRESS R TO RESTART");
 		} else if (collider.gameObject.layer == EnemiesLayer) {
 			GotHit();
 		}
+	}
+
+	public void WrongRecipeDeath(){
+		PlayerDeath("GAME OVER: THAT WASN'T ONE OF THE REQUIRED INGREDIENTS!\nNO IMPROVISING ALLOWED, THIS ISN'T JAZZ\nPRESS R TO RESTART");
+	}
+
+	public void GameCompleteDeath(){
+		PlayerDeath("YOU WIN! CONGRATULATIONS ON SATISFYING MY HUNGER.\nOH, DID I NOT MENTION? YOU ARE DESSERT.", true);
+	}
+
+	void PlayerDeath(string text, bool win=false){
+		alive = false;
+		deathText.enabled = true;
+		deathText.text = text;
+		if (win){
+			Instantiate(PlayerBloodParticlesLooping, BloodParticlesSpawnPoint.transform.position, PlayerBloodParticles.transform.rotation);
+		}
+		else {
+			Instantiate(PlayerBloodParticles, BloodParticlesSpawnPoint.transform.position, PlayerBloodParticles.transform.rotation);
+		}
+
+		GetComponentInChildren<MouseLook>().enabled = false;
 	}
 
 	void GotHit(){
@@ -155,9 +173,7 @@ public class FirstPersonController : MonoBehaviour {
 		UpdateHealthText();
 
 		if (currentHealth <= 0){
-			alive = false;
-			deathText.enabled = true;
-			deathText.text = "GAME OVER: THE FOOD ATE YOU!\nPRESS R TO RESTART";
+			PlayerDeath("GAME OVER: THE FOOD ATE YOU!\nPRESS R TO RESTART");
 			return;
 		}
 
