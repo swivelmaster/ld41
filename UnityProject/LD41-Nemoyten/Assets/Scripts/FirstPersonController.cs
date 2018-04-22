@@ -34,8 +34,9 @@ public class FirstPersonController : MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody>();
 		fpsCamera = GetComponentInChildren<Camera>().gameObject;
+
+		GameStateManager.instance.Player = this.gameObject;
 	}
-	
 
 	void Update () {
 		if (!alive){

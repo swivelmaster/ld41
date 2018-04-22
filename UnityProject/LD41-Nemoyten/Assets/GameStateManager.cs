@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class GameStateManager : MonoBehaviour {
 	
-	public struct Recipe {
+	// public struct Recipe {
 		
-	}
+	// }
 
-	// Use this for initialization
+	public static GameStateManager instance;
+
+	public GameObject Player;
+
 	void Start () {
-		
+		instance = this;
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		
 	}
