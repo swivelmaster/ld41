@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FirstPersonController : MonoBehaviour {
 
@@ -62,6 +63,9 @@ public class FirstPersonController : MonoBehaviour {
 
 	void Update () {
 		if (!alive){
+			if (Input.GetKeyDown("r")){
+				SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+			}
 			return;
 		}
 
@@ -127,12 +131,12 @@ public class FirstPersonController : MonoBehaviour {
 		if (collider.gameObject == stew){
 			alive = false;
 			deathText.enabled = true;
-			deathText.text = "GAME OVER: YOU WERE NOT ONE OF THE INGREDIENTS";
+			deathText.text = "GAME OVER: YOU WERE NOT ONE OF THE INGREDIENTS\nPRESS R TO RESTART";
 		}
 		else if (collider.gameObject == invisibleFloorOfDoom){
 			alive = false;
 			deathText.enabled = true;
-			deathText.text = "GAME OVER: YOU FELL OFF OF THE WORLD. YOU WEREN'T EVEN AT 100% YET";
+			deathText.text = "GAME OVER: YOU FELL OFF OF THE WORLD. YOU WEREN'T EVEN AT 100% YET\nPRESS R TO RESTART";
 			Instantiate(PlayerBloodParticles, BloodParticlesSpawnPoint.transform.position, PlayerBloodParticles.transform.rotation);
 		} else if (collider.gameObject.layer == EnemiesLayer) {
 			GotHit();
@@ -153,7 +157,7 @@ public class FirstPersonController : MonoBehaviour {
 		if (currentHealth <= 0){
 			alive = false;
 			deathText.enabled = true;
-			deathText.text = "GAME OVER: THE FOOD ATE YOU!";
+			deathText.text = "GAME OVER: THE FOOD ATE YOU!\nPRESS R TO RESTART";
 			return;
 		}
 

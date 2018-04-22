@@ -129,5 +129,14 @@ public class Enemy : MonoBehaviour {
 		GetComponentInChildren<MeshRenderer>().transform.Rotate(Vector3.forward, 90f);
 
 		rb.isKinematic = false;
+
+		// remove triggers so they don't hurt the player
+		Collider[] colliders = GetComponentsInChildren<Collider>();
+		foreach (Collider c in colliders){
+			if (c.isTrigger){
+				Destroy(c);
+			}
+		}
+
 	}
 }

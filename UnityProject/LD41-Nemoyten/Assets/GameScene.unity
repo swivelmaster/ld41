@@ -642,6 +642,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &587739392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 587739393}
+  m_Layer: 0
+  m_Name: BloodSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &587739393
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 587739392}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.38, z: 0.686}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1943593551}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &786488671
 GameObject:
   m_ObjectHideFlags: 0
@@ -5757,83 +5785,6 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1001 &1077172637
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4400139240709238, guid: 961c4c3dbd7d84e009ddd25559cc3423, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -3.806
-      objectReference: {fileID: 0}
-    - target: {fileID: 4400139240709238, guid: 961c4c3dbd7d84e009ddd25559cc3423, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 2.238
-      objectReference: {fileID: 0}
-    - target: {fileID: 4400139240709238, guid: 961c4c3dbd7d84e009ddd25559cc3423, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -5.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 4400139240709238, guid: 961c4c3dbd7d84e009ddd25559cc3423, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4400139240709238, guid: 961c4c3dbd7d84e009ddd25559cc3423, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4400139240709238, guid: 961c4c3dbd7d84e009ddd25559cc3423, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4400139240709238, guid: 961c4c3dbd7d84e009ddd25559cc3423, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4400139240709238, guid: 961c4c3dbd7d84e009ddd25559cc3423, type: 2}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 198264127156707268, guid: 961c4c3dbd7d84e009ddd25559cc3423,
-        type: 2}
-      propertyPath: InitialModule.startColor.maxColor.r
-      value: 0.3921569
-      objectReference: {fileID: 0}
-    - target: {fileID: 198264127156707268, guid: 961c4c3dbd7d84e009ddd25559cc3423,
-        type: 2}
-      propertyPath: InitialModule.startColor.maxColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198264127156707268, guid: 961c4c3dbd7d84e009ddd25559cc3423,
-        type: 2}
-      propertyPath: InitialModule.startColor.maxColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198264127156707268, guid: 961c4c3dbd7d84e009ddd25559cc3423,
-        type: 2}
-      propertyPath: randomSeed
-      value: 1964218215
-      objectReference: {fileID: 0}
-    - target: {fileID: 198264127156707268, guid: 961c4c3dbd7d84e009ddd25559cc3423,
-        type: 2}
-      propertyPath: InitialModule.startColor.minColor.r
-      value: 0.847
-      objectReference: {fileID: 0}
-    - target: {fileID: 198264127156707268, guid: 961c4c3dbd7d84e009ddd25559cc3423,
-        type: 2}
-      propertyPath: InitialModule.startColor.minColor.g
-      value: 0.23166974
-      objectReference: {fileID: 0}
-    - target: {fileID: 198264127156707268, guid: 961c4c3dbd7d84e009ddd25559cc3423,
-        type: 2}
-      propertyPath: InitialModule.startColor.minColor.b
-      value: 0.16177699
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 961c4c3dbd7d84e009ddd25559cc3423, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1205596365
 GameObject:
   m_ObjectHideFlags: 0
@@ -6286,6 +6237,7 @@ Transform:
   m_Children:
   - {fileID: 1547413137}
   - {fileID: 147773925}
+  - {fileID: 587739393}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -6343,7 +6295,9 @@ MonoBehaviour:
   bulletSpawnPoint: {fileID: 145148}
   gun: {fileID: 981533159}
   HealthText: {fileID: 2052471037}
-  PlayerBloodParticles: {fileID: 0}
+  PlayerBloodParticles: {fileID: 1768284150996968, guid: 961c4c3dbd7d84e009ddd25559cc3423,
+    type: 2}
+  BloodParticlesSpawnPoint: {fileID: 587739392}
 --- !u!1 &2012706545
 GameObject:
   m_ObjectHideFlags: 0
