@@ -146,7 +146,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh11356
+  m_Name: pb_Mesh11302
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -5713,7 +5713,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1060440013}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.96, y: 4.01, z: 2.58}
+  m_LocalPosition: {x: 2.96, y: 5, z: 2.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1273372254}
@@ -5788,7 +5788,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294965704
+    m_Bits: 4294963656
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -5798,7 +5798,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: ac25f871c3565447e90c94ab6eb71d07, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: e9e44fd93f5f6471e9d428a5f0472d0e, type: 2}
 --- !u!4 &1205596367
 Transform:
   m_ObjectHideFlags: 0
@@ -6160,6 +6160,9 @@ MonoBehaviour:
   groundCollision:
     serializedVersion: 2
     m_Bits: 256
+  EnemiesLayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
   deathText: {fileID: 786488673}
   stew: {fileID: 2012706545}
   invisibleFloorOfDoom: {fileID: 231602094}
@@ -6176,7 +6179,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4465347645138836, guid: 5e3e9280d730f4e75971c02536c73f73, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -10.63
+      value: -1.71
       objectReference: {fileID: 0}
     - target: {fileID: 4465347645138836, guid: 5e3e9280d730f4e75971c02536c73f73, type: 2}
       propertyPath: m_LocalPosition.y
@@ -6184,7 +6187,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4465347645138836, guid: 5e3e9280d730f4e75971c02536c73f73, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -40.64
+      value: -11.85
       objectReference: {fileID: 0}
     - target: {fileID: 4465347645138836, guid: 5e3e9280d730f4e75971c02536c73f73, type: 2}
       propertyPath: m_LocalRotation.x
@@ -6236,8 +6239,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2012706545}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -1.62, z: 0.14}
-  m_LocalScale: {x: 5.1269817, y: 5.1269827, z: 5.1269827}
+  m_LocalPosition: {x: 0, y: -1.17, z: 0.14}
+  m_LocalScale: {x: 6.1586547, y: 6.158655, z: 6.158655}
   m_Children: []
   m_Father: {fileID: 545989581}
   m_RootOrder: 1

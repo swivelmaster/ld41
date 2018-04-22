@@ -7,6 +7,7 @@ public class FirstPersonController : MonoBehaviour {
 
 	public GameObject feets;
 	public LayerMask groundCollision;
+	public LayerMask EnemiesLayerMask;
 
 	Rigidbody rb;
 
@@ -49,7 +50,6 @@ public class FirstPersonController : MonoBehaviour {
 		rb.transform.Translate(new Vector3(strafe, 0, move));
 
 		if (Input.GetButtonDown("Jump") && Physics.Raycast(feets.transform.position, Vector3.down, .2f, groundCollision)){
-			Debug.Log("Jumping");
 			rb.AddForce(new Vector3(0, jumpVelocity, 0), ForceMode.Impulse);
 		}
 
@@ -62,6 +62,40 @@ public class FirstPersonController : MonoBehaviour {
 				bullet.transform.GetComponent<Rigidbody>().AddForce(fpsCamera.transform.forward * bulletSpeed, ForceMode.Impulse);
 			}
 		}
+
+		if (Input.GetKeyUp("f")){
+			if (currentPickedUpEnemy){
+				currentPickedUpEnemy.PickedUp(false);
+				currentPickedUpEnemy.transform.parent = null;				
+				currentPickedUpEnemy.GetComponent<Rigidbody>().AddForce(fpsCamera.transform.forward * 8f, ForceMode.Impulse);
+				currentPickedUpEnemy = null;
+				Debug.Log("Dropping enemy");
+				return;
+			}
+
+			RaycastHit hitInfo;
+			if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hitInfo, 1.0f, EnemiesLayerMask)){
+				Debug.Log("Picking up enemy");
+				PickUpObject(hitInfo.collider.gameObject);
+			}
+			else {
+				Debug.Log("Nothing to pick up.");
+			}
+		}
+	}
+
+	Enemy currentPickedUpEnemy = null;
+
+	void PickUpObject(GameObject enemyGo){
+		Enemy enemy = enemyGo.GetComponent<Enemy>();
+		if (enemy.alive){
+			Debug.Log("Can't pick up an enemy that isn't dead!");
+			return;
+		}
+
+		enemy.PickedUp(true);
+		enemyGo.transform.parent = transform;
+		currentPickedUpEnemy = enemy;
 	}
 
 	void OnTriggerEnter(Collider collider){
