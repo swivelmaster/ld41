@@ -17,7 +17,7 @@ public class FirstPersonController : MonoBehaviour {
 
 	public Text deathText;
 
-	bool alive = true;
+	public bool alive = true;
 
 	public GameObject stew;
 	public GameObject invisibleFloorOfDoom;
