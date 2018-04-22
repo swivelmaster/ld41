@@ -45,6 +45,7 @@ public class FirstPersonController : MonoBehaviour {
 	bool invulnerable = false;
 
 	int EnemiesLayer;
+	int EnemyProjectileLayer;
 
 	void Start () {
 		rb = GetComponent<Rigidbody>();
@@ -56,6 +57,7 @@ public class FirstPersonController : MonoBehaviour {
 		UpdateHealthText();
 
 		EnemiesLayer = LayerMask.NameToLayer("Enemies");
+		EnemyProjectileLayer = LayerMask.NameToLayer("Enemy Projectiles");
 	}
 
 	void UpdateHealthText(){
@@ -135,6 +137,9 @@ public class FirstPersonController : MonoBehaviour {
 		else if (collider.gameObject == invisibleFloorOfDoom){
 			PlayerDeath("GAME OVER: YOU FELL OFF OF THE WORLD. YOU WEREN'T EVEN AT 100% YET\nPRESS R TO RESTART");
 		} else if (collider.gameObject.layer == EnemiesLayer) {
+			GotHit();
+		} else if (collider.gameObject.layer == EnemyProjectileLayer) {
+			Destroy(collider.gameObject);
 			GotHit();
 		}
 	}

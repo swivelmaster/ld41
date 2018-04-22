@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 114296879061351916}
   - component: {fileID: 195009519628729422}
   - component: {fileID: 65221167865119576}
+  - component: {fileID: 65914250249809838}
   m_Layer: 11
   m_Name: Dog-O
   m_TagString: Untagged
@@ -63,6 +64,34 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1755591366901526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4024582703878692}
+  m_Layer: 11
+  m_Name: Projectile Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4024582703878692
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1755591366901526}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0.57600003, z: -0.16699982}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4465347645138836}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4465347645138836
 Transform:
   m_ObjectHideFlags: 1
@@ -73,6 +102,7 @@ Transform:
   m_LocalPosition: {x: -1.71, y: 0.55, z: -11.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4024582703878692}
   - {fileID: 4757831097798538}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -84,7 +114,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1384542098733204}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.52599996, z: 0}
+  m_LocalPosition: {x: 0, y: -0.43499988, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4757831097798538}
@@ -97,12 +127,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1046377525336434}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.947, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4592630836491948}
   m_Father: {fileID: 4465347645138836}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23113630817938976
 MeshRenderer:
@@ -172,6 +202,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0.24}
   m_Center: {x: 0, y: 0.48, z: 0}
+--- !u!65 &65914250249809838
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1234376049416996}
+  m_Material: {fileID: 13400000, guid: 03bb5be93a7944fd4807ca430d250a45, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 0.49}
+  m_Center: {x: 0, y: 0.48, z: 0}
 --- !u!114 &114062795593957644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -194,14 +236,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8cf27a0207f64078b8c6e360767df81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recoilAmount: 5
-  startHealth: 1
+  recoilAmount: 1
+  startHealth: 2
   alive: 1
   enemyType: 0
   StewEnterParticle: {fileID: 1988503435887252, guid: e7f344b0a15674a9c86264893bf498cb,
     type: 2}
   awakeDistance: 5
   recoilTime: 0.5
+  firesProjectiles: 0
+  fireRate: 1
+  projectilePrefab: {fileID: 1517009122480192, guid: 5bd3b69e65f6c416d87b5f90fe9cb428,
+    type: 2}
+  projectileSpeed: 1
+  projectileSpawnPoint: {fileID: 1755591366901526}
 --- !u!195 &195009519628729422
 NavMeshAgent:
   m_ObjectHideFlags: 1
@@ -219,7 +267,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1.01
+  m_Height: 0.99
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4

@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour {
 
 	public float awakeDistance = 5f;
 	// Wake up agent when shot even if player is beyond awake distance
-	bool wasHitOnce = false;
+	bool triggered = false;
 
 	public float recoilTime = .5f;
 
@@ -28,6 +28,12 @@ public class Enemy : MonoBehaviour {
 
 	bool isRecoiling = false;
 
+	public bool firesProjectiles = false;
+	public float fireRate = 3f;
+	public GameObject projectilePrefab;
+	public float projectileSpeed = 2.0f;
+	public GameObject projectileSpawnPoint;
+
 	void Start () {
 		rb = GetComponent<Rigidbody>();
 		currentHealth = startHealth;
@@ -37,10 +43,20 @@ public class Enemy : MonoBehaviour {
 
 		agent = GetComponent<NavMeshAgent>();
 		StartCoroutine(NavigateTic());
-	}
-	
-	void Update () {
 
+		if (firesProjectiles){
+			StartCoroutine(FireProjectile());
+		}
+	}
+
+	IEnumerator FireProjectile(){
+		yield return new WaitForSeconds(fireRate);
+		while (alive){
+			GameObject bullet = Instantiate(projectilePrefab, projectileSpawnPoint.transform.position, Quaternion.identity);
+			Vector3 direction = GameStateManager.instance.Player.transform.position - projectileSpawnPoint.transform.position;
+			bullet.transform.GetComponent<Rigidbody>().AddForce(direction.normalized * projectileSpeed, ForceMode.Impulse);
+			yield return new WaitForSeconds(fireRate);
+		}
 	}
 
 	IEnumerator NavigateTic(){
@@ -50,9 +66,10 @@ public class Enemy : MonoBehaviour {
 			if (isRecoiling || !alive || !agent.enabled){
 				continue;
 			}
-			if (wasHitOnce || Vector3.Distance(GameStateManager.instance.Player.transform.position, transform.position) < awakeDistance){
+			if (triggered || Vector3.Distance(GameStateManager.instance.Player.transform.position, transform.position) < awakeDistance){
 				// Failsafe?
 				agent.isStopped = false;
+				triggered = true;
 				agent.SetDestination(GameStateManager.instance.Player.transform.position);
 			}
 		}
@@ -75,7 +92,7 @@ public class Enemy : MonoBehaviour {
 		hitBy.GetComponent<Bullet>().Hit();
 		currentHealth--;
 		
-		wasHitOnce = true;
+		triggered = true;
 		if (agent.enabled){
 			agent.isStopped = true;
 		}
@@ -121,14 +138,13 @@ public class Enemy : MonoBehaviour {
 		
 		// Just kill it completely
 		agent.enabled = false;
-		
+
 		alive = false;
+		rb.isKinematic = false;
 
 		// This is convoluted but we need the game object that contains the mesh renderer
 		// so we can rotate it to show that the character is dead
 		GetComponentInChildren<MeshRenderer>().transform.Rotate(Vector3.forward, 90f);
-
-		rb.isKinematic = false;
 
 		// remove triggers so they don't hurt the player
 		Collider[] colliders = GetComponentsInChildren<Collider>();
