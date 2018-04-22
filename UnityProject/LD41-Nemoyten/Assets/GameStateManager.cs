@@ -106,7 +106,8 @@ public class GameStateManager : MonoBehaviour {
 		text += CurrentRecipe.DogO.ToString() + "\n";
 		text += "SHOOTY-SHOOTS: " + CurrentRecipe.ShootyShoot.ToString() + "\n";
 		text += "BULLION CUBES: " + CurrentRecipe.BullionCube.ToString() + "\n";
-		text += "SPICY MEMES: " + CurrentRecipe.SpicyMeme.ToString() + "\n";
+		// Cutting spicy meme from game because no time to build a flying enemy
+		// text += "SPICY MEMES: " + CurrentRecipe.SpicyMeme.ToString() + "\n";
 		text += "STEAMED ARTICHOKES: " + CurrentRecipe.SteamedArtichoke.ToString() + "\n";
 
 		RecipeText.text = text;

@@ -52,9 +52,11 @@ public class Enemy : MonoBehaviour {
 	IEnumerator FireProjectile(){
 		yield return new WaitForSeconds(fireRate);
 		while (alive){
-			GameObject bullet = Instantiate(projectilePrefab, projectileSpawnPoint.transform.position, Quaternion.identity);
-			Vector3 direction = GameStateManager.instance.Player.transform.position - projectileSpawnPoint.transform.position;
-			bullet.transform.GetComponent<Rigidbody>().AddForce(direction.normalized * projectileSpeed, ForceMode.Impulse);
+			if (triggered){
+				GameObject bullet = Instantiate(projectilePrefab, projectileSpawnPoint.transform.position, Quaternion.identity);
+				Vector3 direction = GameStateManager.instance.Player.transform.position - projectileSpawnPoint.transform.position;
+				bullet.transform.GetComponent<Rigidbody>().AddForce(direction.normalized * projectileSpeed, ForceMode.Impulse);
+			}
 			yield return new WaitForSeconds(fireRate);
 		}
 	}
