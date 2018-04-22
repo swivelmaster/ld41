@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour {
 
 	void Start () {
 		rb = GetComponent<Rigidbody>();
-		currentHealth = startHealth;
+		currentHealth = startHealth * 2; // Fix to a really dumb bug that's causing double hits.
 
 		ProjectileLayer = LayerMask.NameToLayer("Projectiles");
 		StewLayer = LayerMask.NameToLayer("Stew");
@@ -91,9 +91,12 @@ public class Enemy : MonoBehaviour {
 	// already recoiling so we don't stack up the coroutines that stop it
 	// and make weird things happen.
 	public void GotHit(GameObject hitBy){
+
+		Debug.Log("HIT! current health is " + currentHealth.ToString());
+
 		hitBy.GetComponent<Bullet>().Hit();
 		currentHealth--;
-		
+
 		triggered = true;
 		if (agent.enabled){
 			agent.isStopped = true;

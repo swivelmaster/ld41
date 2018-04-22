@@ -34,7 +34,7 @@ public class FirstPersonController : MonoBehaviour {
 	GameObject fpsCamera;
 
 	int maxHealth = 10;
-	int currentHealth = 10;
+	public int currentHealth = 10;
 	public Text HealthText;
 
 	public GameObject PlayerBloodParticles;

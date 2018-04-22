@@ -231,7 +231,7 @@ MonoBehaviour:
   enemyType: 1
   StewEnterParticle: {fileID: 1988503435887252, guid: e7f344b0a15674a9c86264893bf498cb,
     type: 2}
-  awakeDistance: 5
+  awakeDistance: 8
   recoilTime: 0.5
   firesProjectiles: 1
   fireRate: 1

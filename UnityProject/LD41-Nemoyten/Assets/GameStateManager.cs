@@ -138,7 +138,8 @@ public class GameStateManager : MonoBehaviour {
 				return;
 			} else {
 				GetNextRecipe();
-				RecipeCompleteText.text = "DELICIOUS!\nAND YET I STILL HUNGER...";
+				RecipeCompleteText.text = "DELICIOUS!\nAND YET I STILL HUNGER...\n";
+				Player.GetComponent<FirstPersonController>().currentHealth = 10;
 				StartCoroutine(ClearDeliciousText());
 			}
 		}
