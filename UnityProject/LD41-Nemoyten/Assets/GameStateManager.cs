@@ -6,31 +6,31 @@ using UnityEngine.UI;
 public class GameStateManager : MonoBehaviour {
 	
 	public enum EnemyType {
-		DogO, ShootyChute, BullionCube, SpicyMeme, SteamedArtichoke
+		DogO, ShootyShoot, BullionCube, SpicyMeme, SteamedArtichoke
 	}
 
 	public struct Recipe {
 		public int DogO;
-		public int ShootyChute;
+		public int ShootyShoot;
 		public int BullionCube;
 		public int SpicyMeme;
 		public int SteamedArtichoke;
 
 		public Recipe(int dogo, int shooty, int cube, int spicy, int steamed){
 			DogO = dogo;
-			ShootyChute = shooty;
+			ShootyShoot = shooty;
 			BullionCube = cube;
 			SpicyMeme = spicy;
 			SteamedArtichoke = steamed;
 		}
 
 		public bool Complete(){
-			return DogO + ShootyChute + BullionCube + SpicyMeme + SteamedArtichoke == 0;
+			return DogO + ShootyShoot + BullionCube + SpicyMeme + SteamedArtichoke == 0;
 		}
 
 		public bool IsValid(){
 			// In other words, if any of these go negative, you lose.
-			return DogO >= 0 && ShootyChute >= 0 && BullionCube >= 0 && SpicyMeme >= 0 && SteamedArtichoke >= 0;
+			return DogO >= 0 && ShootyShoot >= 0 && BullionCube >= 0 && SpicyMeme >= 0 && SteamedArtichoke >= 0;
 		}
 	}
 
@@ -62,8 +62,8 @@ public class GameStateManager : MonoBehaviour {
 			case EnemyType.DogO:
 				CurrentRecipe.DogO--;
 				break;
-			case EnemyType.ShootyChute:
-				CurrentRecipe.ShootyChute--;
+			case EnemyType.ShootyShoot:
+				CurrentRecipe.ShootyShoot--;
 				break;
 			case EnemyType.SpicyMeme:
 				CurrentRecipe.SpicyMeme--;
@@ -104,7 +104,7 @@ public class GameStateManager : MonoBehaviour {
 	void UpdateRecipeText(){
 		string text = "REQUIRED INGREDIENTS:\nDOG-O's: ";
 		text += CurrentRecipe.DogO.ToString() + "\n";
-		text += "SHOOTY-CHUTES: " + CurrentRecipe.ShootyChute.ToString() + "\n";
+		text += "SHOOTY-SHOOTS: " + CurrentRecipe.ShootyShoot.ToString() + "\n";
 		text += "BULLION CUBES: " + CurrentRecipe.BullionCube.ToString() + "\n";
 		text += "SPICY MEMES: " + CurrentRecipe.SpicyMeme.ToString() + "\n";
 		text += "STEAMED ARTICHOKES: " + CurrentRecipe.SteamedArtichoke.ToString() + "\n";
