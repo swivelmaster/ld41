@@ -13,6 +13,9 @@ public class FirstPersonController : MonoBehaviour {
 	public AudioSource HitSound;
 	public AudioSource DeathSound;
 
+	public AudioSource PickUpSound;
+	public AudioSource PutDownSound;
+
 	public GameObject feets;
 	public LayerMask groundCollision;
 	public LayerMask EnemiesLayerMask;
@@ -107,6 +110,8 @@ public class FirstPersonController : MonoBehaviour {
 				currentPickedUpEnemy.GetComponent<Rigidbody>().AddForce(fpsCamera.transform.forward * 8f, ForceMode.Impulse);
 				currentPickedUpEnemy = null;
 				//Debug.Log("Dropping enemy");
+
+				PutDownSound.Play();
 				return;
 			}
 
@@ -114,6 +119,7 @@ public class FirstPersonController : MonoBehaviour {
 			if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hitInfo, 1.0f, EnemiesLayerMask)){
 				//Debug.Log("Picking up enemy");
 				PickUpObject(hitInfo.collider.gameObject);
+				PickUpSound.Play();
 			}
 			else {
 				//Debug.Log("Nothing to pick up.");

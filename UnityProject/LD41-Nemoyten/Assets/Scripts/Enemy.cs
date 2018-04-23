@@ -5,6 +5,11 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour {
 
+	public AudioSource AwakeSound;
+	public AudioSource DeathSound;
+
+	public AudioSource ShootSound;
+
 	public float recoilAmount = 5f;
 	public int startHealth = 5;
 	int currentHealth = 5;
@@ -56,10 +61,13 @@ public class Enemy : MonoBehaviour {
 				GameObject bullet = Instantiate(projectilePrefab, projectileSpawnPoint.transform.position, Quaternion.identity);
 				Vector3 direction = GameStateManager.instance.Player.transform.position - projectileSpawnPoint.transform.position;
 				bullet.transform.GetComponent<Rigidbody>().AddForce(direction.normalized * projectileSpeed, ForceMode.Impulse);
+				ShootSound.Play();
 			}
 			yield return new WaitForSeconds(fireRate);
 		}
 	}
+
+	bool playedAwakeSound = false;
 
 	IEnumerator NavigateTic(){
 		while (alive){
@@ -69,6 +77,11 @@ public class Enemy : MonoBehaviour {
 				continue;
 			}
 			if (triggered || Vector3.Distance(GameStateManager.instance.Player.transform.position, transform.position) < awakeDistance){
+				
+				if (!playedAwakeSound){
+					AwakeSound.Play();
+					playedAwakeSound = true;
+				}
 				// Failsafe?
 				agent.isStopped = false;
 				triggered = true;
@@ -91,6 +104,11 @@ public class Enemy : MonoBehaviour {
 	// already recoiling so we don't stack up the coroutines that stop it
 	// and make weird things happen.
 	public void GotHit(GameObject hitBy){
+
+		if (!playedAwakeSound){
+			AwakeSound.Play();
+			playedAwakeSound = true;
+		}
 
 		Debug.Log("HIT! current health is " + currentHealth.ToString());
 
@@ -140,6 +158,8 @@ public class Enemy : MonoBehaviour {
 		if (agent.enabled){
 			agent.isStopped = true;
 		}
+
+		DeathSound.Play();
 		
 		// Just kill it completely
 		agent.enabled = false;
