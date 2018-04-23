@@ -485,16 +485,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8cf27a0207f64078b8c6e360767df81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AwakeSound: {fileID: 0}
-  DeathSound: {fileID: 0}
+  AwakeSound: {fileID: 82566457568029152}
+  DeathSound: {fileID: 82841543088461786}
+  ShootSound: {fileID: 0}
   recoilAmount: 1
   startHealth: 5
   alive: 1
   enemyType: 2
   StewEnterParticle: {fileID: 1988503435887252, guid: e7f344b0a15674a9c86264893bf498cb,
     type: 2}
-  awakeDistance: 15
-  recoilTime: 0.5
+  awakeDistance: 25
+  recoilTime: 0.1
   firesProjectiles: 0
   fireRate: 1
   projectilePrefab: {fileID: 1517009122480192, guid: 5bd3b69e65f6c416d87b5f90fe9cb428,
@@ -510,7 +511,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3
+  m_Speed: 5
   m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 200

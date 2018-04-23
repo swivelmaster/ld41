@@ -7,7 +7,7 @@ public class GameStateManager : MonoBehaviour {
 	
 	public AudioSource StewingSound;
 
-	public LayerMask EnemiesLayerMask;
+	public LayerMask SpawnAvoidLayerMask;
 
 	public enum EnemyType {
 		DogO, ShootyShoot, BullionCube, SpicyMeme, SteamedArtichoke
@@ -84,7 +84,6 @@ public class GameStateManager : MonoBehaviour {
 
 		AllRecipes.Enqueue(new Recipe(1, 0, 0, 0));
 		AllRecipes.Enqueue(new Recipe(1, 1, 0, 0));
-		AllRecipes.Enqueue(new Recipe(3, 2, 0, 0));
 		AllRecipes.Enqueue(new Recipe(2, 0, 1, 0));
 		AllRecipes.Enqueue(new Recipe(0, 1, 2, 0));
 		AllRecipes.Enqueue(new Recipe(1, 2, 3, 0));
@@ -95,14 +94,13 @@ public class GameStateManager : MonoBehaviour {
 
 		AllSpawnOdds.Enqueue(new SpawnOdds(1f, 0f, 0f, 0f));
 		AllSpawnOdds.Enqueue(new SpawnOdds(.5f, .5f, 0f, 0f));
-		AllSpawnOdds.Enqueue(new SpawnOdds(.6f, .4f, 0f, 0f));
 		AllSpawnOdds.Enqueue(new SpawnOdds(.4f, .2f, .4f, 0f));
-		AllSpawnOdds.Enqueue(new SpawnOdds(.4f, .4f, .2f, 0f));
-		AllSpawnOdds.Enqueue(new SpawnOdds(.4f, .4f, .2f, 0f));
-		AllSpawnOdds.Enqueue(new SpawnOdds(.3f, .3f, .2f, .2f));
-		AllSpawnOdds.Enqueue(new SpawnOdds(.3f, .3f, .3f, .1f));
-		AllSpawnOdds.Enqueue(new SpawnOdds(.3f, .3f, .3f, .1f));
-		AllSpawnOdds.Enqueue(new SpawnOdds(.3f, .3f, .3f, .1f));
+		AllSpawnOdds.Enqueue(new SpawnOdds(.3f, .3f, .4f, 0f));
+		AllSpawnOdds.Enqueue(new SpawnOdds(.3f, .3f, .4f, 0f));
+		AllSpawnOdds.Enqueue(new SpawnOdds(.2f, .2f, .2f, .4f));
+		AllSpawnOdds.Enqueue(new SpawnOdds(.1f, .4f, .3f, .2f));
+		AllSpawnOdds.Enqueue(new SpawnOdds(.1f, .4f, .3f, .2f));
+		AllSpawnOdds.Enqueue(new SpawnOdds(.1f, .4f, .3f, .2f));
 
 
 		GetNextRecipe();
@@ -144,7 +142,8 @@ public class GameStateManager : MonoBehaviour {
 			} else {
 				GetNextRecipe();
 				RecipeCompleteText.text = "DELICIOUS!\nAND YET I STILL HUNGER...\n";
-				Player.GetComponent<FirstPersonController>().currentHealth = 10;
+				Player.GetComponent<FirstPersonController>().RestoreHealth();
+
 				StartCoroutine(ClearDeliciousText());
 			}
 		}
@@ -165,10 +164,10 @@ public class GameStateManager : MonoBehaviour {
 	}
 
 	IEnumerator Spawner(){
-		yield return new WaitForSeconds(3f);
+		yield return new WaitForSeconds(1f);
 		while (Player.GetComponent<FirstPersonController>().alive){
 			AttemptToSpawn();
-			yield return new WaitForSeconds(3f);
+			yield return new WaitForSeconds(10f);
 		}
 	}
 
@@ -182,8 +181,8 @@ public class GameStateManager : MonoBehaviour {
 			Transform spawnPoint = SpawnPoints[index];
 			
 			// Don't spawn enemies at this spawn location if there are already enemies nearby to prevent clustering
-			// and overlapping.
-			Collider[] enemies = Physics.OverlapSphere(spawnPoint.position, 4f, EnemiesLayerMask, QueryTriggerInteraction.Ignore);
+			// and overlapping. Also don't spawn right next to the player, that's a dick move.
+			Collider[] enemies = Physics.OverlapSphere(spawnPoint.position, 4f, SpawnAvoidLayerMask, QueryTriggerInteraction.Ignore);
 			if (enemies.Length == 0){
 				GameObject objectToInstantiate = DogOPrefab;
 				

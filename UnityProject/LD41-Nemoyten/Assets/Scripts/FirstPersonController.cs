@@ -70,6 +70,11 @@ public class FirstPersonController : MonoBehaviour {
 		EnemyProjectileLayer = LayerMask.NameToLayer("Enemy Projectiles");
 	}
 
+	public void RestoreHealth(){
+		currentHealth = 10;
+		UpdateHealthText();	
+	}
+
 	void UpdateHealthText(){
 		HealthText.text = "HEALTH: " + currentHealth.ToString();
 	}
@@ -116,7 +121,7 @@ public class FirstPersonController : MonoBehaviour {
 			}
 
 			RaycastHit hitInfo;
-			if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hitInfo, 1.0f, EnemiesLayerMask)){
+			if (Physics.Raycast(fpsCamera.transform.position, fpsCamera.transform.forward, out hitInfo, 1.5f, EnemiesLayerMask)){
 				//Debug.Log("Picking up enemy");
 				PickUpObject(hitInfo.collider.gameObject);
 				PickUpSound.Play();
