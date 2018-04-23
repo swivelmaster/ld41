@@ -6,6 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class FirstPersonController : MonoBehaviour {
 
+	public AudioSource ShootSound;
+	public AudioSource ExplodeSound;
+
+	public AudioSource JumpSound;
+	public AudioSource HitSound;
+	public AudioSource DeathSound;
+
 	public GameObject feets;
 	public LayerMask groundCollision;
 	public LayerMask EnemiesLayerMask;
@@ -79,14 +86,16 @@ public class FirstPersonController : MonoBehaviour {
 
 		if (Input.GetButtonDown("Jump") && Physics.Raycast(feets.transform.position, Vector3.down, .2f, groundCollision)){
 			rb.AddForce(new Vector3(0, jumpVelocity, 0), ForceMode.Impulse);
+			JumpSound.Play();
 		}
 
 		if (Input.GetButtonDown("Fire1")){
 			if (Time.time - rateOfFire > lastFired){
 				//Debug.Log("Shoot " + Time.time.ToString());
 				lastFired = Time.time;
-
+				ShootSound.Play();
 				GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.transform.position, Quaternion.identity);
+				bullet.GetComponent<Bullet>().explodeSound = ExplodeSound;
 				bullet.transform.GetComponent<Rigidbody>().AddForce(fpsCamera.transform.forward * bulletSpeed, ForceMode.Impulse);
 			}
 		}
@@ -164,6 +173,8 @@ public class FirstPersonController : MonoBehaviour {
 		}
 
 		GetComponentInChildren<MouseLook>().enabled = false;
+
+		DeathSound.Play();
 	}
 
 	void GotHit(){
@@ -182,6 +193,7 @@ public class FirstPersonController : MonoBehaviour {
 			return;
 		}
 
+		HitSound.Play();
 		StartCoroutine(RemoveInvulnerability());
 	}
 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
+	public AudioSource explodeSound;
+
 	public GameObject ExplodeParticle;
 
 	float startTime = 0;
@@ -21,6 +23,7 @@ public class Bullet : MonoBehaviour {
 
 	public void Hit(){
 		Instantiate(ExplodeParticle, transform.position, Quaternion.identity);
+		explodeSound.Play();
 		Destroy(gameObject);
 	}
 }

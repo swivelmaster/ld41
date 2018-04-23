@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class GameStateManager : MonoBehaviour {
 	
+	public AudioSource StewingSound;
+
 	public LayerMask EnemiesLayerMask;
 
 	public enum EnemyType {
@@ -114,6 +116,9 @@ public class GameStateManager : MonoBehaviour {
 	}
 	
 	public void UpdateRecipe(EnemyType enemyType){
+
+		StewingSound.Play();
+
 		switch (enemyType){
 			case EnemyType.BullionCube:
 				CurrentRecipe.BullionCube--;
