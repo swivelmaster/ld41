@@ -61,6 +61,7 @@ public class Enemy : MonoBehaviour {
 				GameObject bullet = Instantiate(projectilePrefab, projectileSpawnPoint.transform.position, Quaternion.identity);
 				Vector3 direction = GameStateManager.instance.Player.transform.position - projectileSpawnPoint.transform.position;
 				bullet.transform.GetComponent<Rigidbody>().AddForce(direction.normalized * projectileSpeed, ForceMode.Impulse);
+				bullet.GetComponent<Bullet>().explodeSound = GameStateManager.instance.GlobalExplosionSound;
 				ShootSound.Play();
 			}
 			yield return new WaitForSeconds(fireRate);
@@ -110,7 +111,7 @@ public class Enemy : MonoBehaviour {
 			playedAwakeSound = true;
 		}
 
-		Debug.Log("HIT! current health is " + currentHealth.ToString());
+		// Debug.Log("HIT! current health is " + currentHealth.ToString());
 
 		hitBy.GetComponent<Bullet>().Hit();
 		currentHealth--;

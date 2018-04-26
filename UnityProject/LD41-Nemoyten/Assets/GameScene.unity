@@ -202,7 +202,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh11410
+  m_Name: pb_Mesh11492
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -1171,7 +1171,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh33284
+  m_Name: pb_Mesh11478
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -1693,6 +1693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StewingSound: {fileID: 168278330}
+  GlobalExplosionSound: {fileID: 1732625570}
   SpawnAvoidLayerMask:
     serializedVersion: 2
     m_Bits: 10240
@@ -1707,6 +1708,7 @@ MonoBehaviour:
   Player: {fileID: 0}
   RecipeText: {fileID: 1837026672}
   RecipeCompleteText: {fileID: 1936016903}
+  MonstersActive: 1
 --- !u!4 &801356792
 Transform:
   m_ObjectHideFlags: 0
@@ -22827,7 +22829,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 0.829
       inSlope: 0
       outSlope: 0
       tangentMode: 0

@@ -8,10 +8,13 @@ public class Bullet : MonoBehaviour {
 
 	public GameObject ExplodeParticle;
 
+	int GroundLayer;
+
 	float startTime = 0;
 	float ttl = 5f;
 	void Start () {
 		startTime = Time.time;
+		GroundLayer = LayerMask.NameToLayer("Ground");
 	}
 	
 	void Update () {
@@ -23,7 +26,14 @@ public class Bullet : MonoBehaviour {
 
 	public void Hit(){
 		Instantiate(ExplodeParticle, transform.position, Quaternion.identity);
-		explodeSound.Play();
+		if (explodeSound)
+			explodeSound.Play();
 		Destroy(gameObject);
+	}
+
+	public void OnTriggerEnter(Collider collider){
+		if (collider.gameObject.layer == GroundLayer){
+			Hit();
+		}
 	}
 }

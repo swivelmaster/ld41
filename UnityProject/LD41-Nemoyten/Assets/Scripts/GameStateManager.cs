@@ -7,6 +7,9 @@ public class GameStateManager : MonoBehaviour {
 	
 	public AudioSource StewingSound;
 
+	// Helping enemies get a reference to this
+	public AudioSource GlobalExplosionSound;
+
 	public LayerMask SpawnAvoidLayerMask;
 
 	public enum EnemyType {
@@ -89,8 +92,8 @@ public class GameStateManager : MonoBehaviour {
 		AllRecipes.Enqueue(new Recipe(1, 2, 3, 0));
 		AllRecipes.Enqueue(new Recipe(2, 2, 0, 1));
 		AllRecipes.Enqueue(new Recipe(4, 3, 4, 1));
-		AllRecipes.Enqueue(new Recipe(8, 4, 2, 2));
-		AllRecipes.Enqueue(new Recipe(10, 5, 4, 2));
+		AllRecipes.Enqueue(new Recipe(4, 4, 2, 2));
+		AllRecipes.Enqueue(new Recipe(5, 5, 4, 2));
 
 		AllSpawnOdds.Enqueue(new SpawnOdds(1f, 0f, 0f, 0f));
 		AllSpawnOdds.Enqueue(new SpawnOdds(.5f, .5f, 0f, 0f));
@@ -100,7 +103,7 @@ public class GameStateManager : MonoBehaviour {
 		AllSpawnOdds.Enqueue(new SpawnOdds(.2f, .2f, .2f, .4f));
 		AllSpawnOdds.Enqueue(new SpawnOdds(.1f, .4f, .3f, .2f));
 		AllSpawnOdds.Enqueue(new SpawnOdds(.1f, .4f, .3f, .2f));
-		AllSpawnOdds.Enqueue(new SpawnOdds(.1f, .4f, .3f, .2f));
+		AllSpawnOdds.Enqueue(new SpawnOdds(.3f, .2f, .3f, .2f));
 
 
 		GetNextRecipe();
@@ -163,10 +166,13 @@ public class GameStateManager : MonoBehaviour {
 		RecipeCompleteText.text = "";
 	}
 
+	// When debugging other stuff, flip this to off.
+	public bool MonstersActive = true;
+
 	IEnumerator Spawner(){
 		yield return new WaitForSeconds(1f);
 		while (Player.GetComponent<FirstPersonController>().alive){
-			AttemptToSpawn();
+			if (MonstersActive) AttemptToSpawn();
 			yield return new WaitForSeconds(10f);
 		}
 	}
@@ -199,7 +205,7 @@ public class GameStateManager : MonoBehaviour {
 				}
 
 				Instantiate(objectToInstantiate, spawnPoint.position, objectToInstantiate.transform.rotation);
-				Debug.Log("Succesfully instantiated enemy.");
+				// Debug.Log("Succesfully instantiated enemy.");
 				return;
 			}
 		}

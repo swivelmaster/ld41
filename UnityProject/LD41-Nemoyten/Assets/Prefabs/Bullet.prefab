@@ -157,9 +157,9 @@ Rigidbody:
   m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &114995373614030180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78bfe691691844c5cbad82f2032c5f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explodeSound: {fileID: 0}
   ExplodeParticle: {fileID: 1665057200110432, guid: 418369dcd79334b31b7a6efbd8a47ec3,
     type: 2}
 --- !u!135 &135210431740244028
@@ -183,7 +184,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.1
+  m_Radius: 0.28
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198245987162999218
 ParticleSystem:
@@ -245,7 +246,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 748473361
+  randomSeed: -332799733
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -805,7 +806,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 20
       minScalar: 10
       maxCurve:
         serializedVersion: 2

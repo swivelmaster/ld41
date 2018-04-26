@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78bfe691691844c5cbad82f2032c5f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explodeSound: {fileID: 0}
   ExplodeParticle: {fileID: 1665057200110432, guid: 418369dcd79334b31b7a6efbd8a47ec3,
     type: 2}
 --- !u!135 &135216278815752328
@@ -183,7 +184,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.1
+  m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198544289475169066
 ParticleSystem:
